@@ -12,7 +12,7 @@ services:
     volumes:
       - /var/opt/mssql
       # we copy our scripts onto the container
-      - ./sql:/usr/src/app 
+      - ./database:/usr/src/app 
     # bash will be executed from that path, our scripts folder
     working_dir: /usr/src/app 
     # run the entrypoint.sh that will import the data AND sqlserver
@@ -23,3 +23,8 @@ services:
       # don't use this if you don't want to persit data between docker up and down
     volumes_from:
       - mssqldata_test
+
+networks:
+  default:
+    external:
+      name: seoc_network
